@@ -1,0 +1,224 @@
+%  This is the driver file for the CMB-S4 Science Book.
+
+%%% it has been adapted from the Snowmass reports from the Cosmic Frontier  %%%%
+%%% Working Groups to use bibtex. 19Sep15, T. Crawford (orig. 5/13/13 J. Feng) %%%%
+
+%  D. Hitlin   9/23/03   derived from the BABAR Physics Book format
+
+%  To use LATEX with this format, you must have the follwing files 
+%  in the same directory as your text source and figure files
+%  tcibook.cls
+%  fancyhea.sty
+%  work.sty
+%  epsfig.sty
+%  workshopsym.tex       This file provides macros for many common symbols
+%                         Using these macros will provide uniformity of notation
+%                         for the basic particle symbols, units, etc.
+%
+%  These provide the page size, type style, headings, etc.
+\documentclass[titlepage,oneside]{tcibook}
+\usepackage{fancyhea}
+\usepackage{work}
+\usepackage{bm}       %    enables bold math symbols  e.g.  \bm{\gamma}
+\usepackage{graphicx}
+\usepackage[usenames]{xcolor} %used for font color
+\definecolor{xlinkcolor}{cmyk}{1,1,0,0}
+\usepackage[
+     colorlinks=true,    % false: boxed links; true: colored links
+     linkcolor=xlinkcolor,     % color of internal links
+     citecolor=xlinkcolor,     % color of links to bibliography
+     filecolor=xlinkcolor,  % color of file links
+     urlcolor=xlinkcolor,      % color of external links
+     final=true
+]{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{chngcntr}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+\counterwithout{figure}{chapter}
+\usepackage{titlesec}
+
+\usepackage{newtxtext,newtxmath} % this is causing the etoolbox warning
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{float}
+
+\setlength{\headheight}{14pt}
+
+% subsubsubsections and subsubsections are numbered as well as chapters, sections and subsections.
+\setcounter{secnumdepth}{3}
+
+\DeclareUrlCommand\email{\urlstyle{rm}}
+\graphicspath{{./}{./figures/}}
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+\usepackage{lineno}
+%\linenumbers
+
+%\usepackage[firstpage]{draftwatermark}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{1}
+
+% Custom commands from LSST DESC, see texmf/styles/lsstdesc_macros.sty
+\usepackage{macros}
+\usepackage{aas_macros}
+
+% Add your own macros here:
+
+% Inline comments and highlighting
+%\newcommand{\FIXME}[1]{{\bf \textcolor{red}{#1}}}
+%\newcommand{\CHECK}[1]{{\bf \textcolor{orange}{#1}}}
+%\newcommand{\NEW}[1]{{\textcolor{blue}{#1}}}
+
+\newcommand{\FIXME}[1]{}
+\newcommand{\CHECK}[1]{{#1}}
+\newcommand{\NEW}[1]{{#1}}
+
+% These are commented out for production
+\newcommand{\Contributors}[1]{ \large \textit{#1} }
+%\newcommand{\Contact}[1]{ {\footnotesize [\textbf{#1}]}}
+%\newcommand{\Comment}[3]{\textcolor{#1}{(#2: #3)}}
+
+%\newcommand{\Contributors}[1]{}
+\newcommand{\Contact}[1]{}
+\newcommand{\Comment}[3]{}
+
+\newcommand{\ADW}[1]{\Comment{blue}{ADW}{#1}} % Alex Drlica-Wagner
+\newcommand{\YYM}[1]{\Comment{blue}{YYM}{#1}} % Yao-Yuan Mao
+\newcommand{\WAD}[1]{\Comment{blue}{WAD}{#1}} % Will Dawson
+\newcommand{\MSM}[1]{\Comment{green}{MSM}{#1}} % Manuel Meyer
+\newcommand{\CPW}[1]{\Comment{blue}{CPW}{#1}} % Chanda Prescod-Weinstein
+\newcommand{\RHW}[1]{\Comment{blue}{RHW}{#1}} % Risa Wechsler 
+\newcommand{\EON}[1]{\Comment{purple}{EON}{#1}} % Ethan Nadler
+\newcommand{\TT}[1]{\Comment{orange}{TT}{#1}} % Tony Tyson
+\newcommand{\cora}[1]{\Comment{blue}{Cora}{#1}} %Cora Dvorkin
+\newcommand{\CDF}[1]{\Comment{red}{CDF}{#1}} % Chris Fassnacht
+\newcommand{\CRK}[1]{\Comment{purple}{CRK}{#1}} % Chuck Keeton 
+\newcommand{\Yashar}[1]{\Comment{red}{Yashar}{#1}}  % Yashar Hezaveh
+\newcommand{\DAH}[1]{\Comment{blue}{DH}{#1}} %David Hendel
+\newcommand{\AHGP}[1]{\Comment{cyan}{AHGP}{#1}} %Annika Peter
+\newcommand{\FYCR}[1]{\Comment{magenta}{FYCR}{#1}} % Francis-Yan Cyr-Racine
+\newcommand{\MG}[1]{\Comment{red}{MG}{#1}} % Maurizio Giannotti
+\newcommand{\OS}[1]{\Comment{green}{OS}{#1}} % Oscar Straniero
+\newcommand{\DE}[1]{\Comment{orange}{DE}{#1}} % Denis Erkal
+\newcommand{\SDM}[1]{\Comment{blue}{SDM}{#1}} % Sam McDermott
+\newcommand{\JGB}[1]{\Comment{red}{JGB}{#1}} % Juan Garcia-Bellido
+\newcommand{\KB}[1]{\Comment{orange}{KB}{#1}} % Keith Bechtol
+\newcommand{\ET}[1]{\Comment{blue}{ET}{#1}} % Erik Tollerud
+\newcommand{\EN}[1]{\Comment{blue}{EN}{#1}} % Eric Nuss
+
+% FERMILAB-CONF-19-048-A-AE
+
+\begin{document}
+
+\raggedbottom
+
+\pagenumbering{roman}
+
+\parindent=0pt
+\parskip=8pt
+\setlength{\evensidemargin}{0pt}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\marginparsep}{0.0in}
+\setlength{\marginparwidth}{0.0in}
+\marginparpush=0pt
+
+% The content begins here
+
+\renewcommand{\chapname}{chap:intro_}
+\renewcommand{\chapterdir}{.}
+\renewcommand{\arraystretch}{1.25}
+\addtolength{\arraycolsep}{-3pt}
+\renewcommand{\paragraph}[1]{\emph{#1}\xspace}
+
+\pagenumbering{roman} 
+\chapter*{Probing the Fundamental Nature of Dark Matter with the Large Synoptic Survey Telescope}
+\vskip -9.5pt
+\hbox to\headwidth{%
+       \leaders\hrule height1.5pt\hfil}
+\vskip-6.5pt
+\hbox to\headwidth{%
+       \leaders\hrule height3.5pt\hfil}
+
+
+\begin{center}
+  {\Large\bf
+    LSST Dark Matter Group\\
+    \bigskip
+    \today\\
+    \bigskip
+     v1.1
+  }
+\end{center}
+\eject
+
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Executive Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{summary.tex}
+
+\clearpage
+\input{endorsers.tex}
+
+\tableofcontents 
+
+\eject
+\pagenumbering{arabic} 
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{intro.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theory and Dark Matter Models
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{DMtheory/theorytext.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dark Matter Probes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{instrument/intrumenttext.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Complementarity
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{nearfield/nearfieldtext.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Discovery
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{midfield/midfieldtext.tex}
+
+\input{farfield/farfieldtext.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{ack.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+\def\bibname{References}
+\chaptermark{References}
+
+\begingroup
+  \small
+  \setlength{\bibsep}{0pt plus 0.5ex}
+  \bibliographystyle{yahapj}
+  \bibliography{main}
+\endgroup
+
+\end{document}
