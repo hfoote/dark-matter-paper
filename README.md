@@ -1,9 +1,14 @@
-# LSST Dark Matter Paper
+# Spec S5 Dark Matter Paper
 
-This repository is intended to serve as a rallying point to collect code, content, and conversations related to the LSST Dark Matter white paper. It has largely been developed during LSSTC-funded dark matter workshops including a [Pitt PACC workshop](https://lsstdarkmatter.github.io/PreviousWorkshops/pitt2018/index.html) in March 2018 and a [Livermore workshop](https://lsstdarkmatter.github.io/) in October 2018.
+This repository is intended to serve as the main organizing hub for the white paper on the Spec S5 dark matter science cases. These materials reflect contributions from the broad astrophysics community, and were developed in large part over the course of a series of workshops held at the University of Chicago (October 2025) and NOIRLab (March 2026). 
 
-The most recent release of the white paper can be found on [releases](../../releases).
+Visit the Issues page for a list of hack topics and to-do's. 
 
-Visit the [Issues](https://github.com/lsstdarkmatter/dark-matter-paper/issues) page for a list of hack projects and to-do's. 
+Preliminary outlines of the main science cases are summarized in these documents: 
 
-More information on the LSST Dark Matter Group can be found at [https://lsstdarkmatter.github.io/](https://lsstdarkmatter.github.io/)
+- Near field cosmology: https://docs.google.com/document/d/1EG5eqBrDWixeSPbPmPUJfmTCMtGzrCuq0oYYPp3uuw8/edit?tab=t.0#heading=h.xwiv0e9yu6sg
+
+- Mid field cosmology: https://docs.google.com/document/d/1EPwTX0CEoZOlvn49cHR8tZcKurgSHiHkvfZTEG83gXQ/edit?tab=t.0#heading=h.xwiv0e9yu6sg
+
+- Far field cosmology: https://docs.google.com/document/d/1FYtbPkJEqfjpcSTFYNwdvPo6ASyUymTKl1GmtxRyCDM/edit?tab=t.0
+
