@@ -1,4 +1,4 @@
-# mass enclosed, CDF
+# r_half [kpc], M_enc(r_half) [M_sun], M_200 [M_sun], concentration
 3162.27766,535.00000
 4248.20170,535.00000
 5707.03133,535.00000
