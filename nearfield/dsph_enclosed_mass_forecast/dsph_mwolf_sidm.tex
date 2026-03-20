@@ -1,0 +1,125 @@
+% ============================================================
+% WHITE PAPER TEXT — SIDM HALF-LIGHT RADIUS MASS FUNCTION
+% ============================================================
+
+% ── HIGH-LEVEL PARAGRAPH (for dark matter white paper body) ──────────────
+
+\subsection*{Dark Matter Microphysics from the Enclosed Mass Function of Local Group Dwarfs}
+
+The internal structure of dwarf spheroidal galaxies (dSphs) in the Local Group provides
+one of the most sensitive probes of dark matter microphysics on sub-galactic scales.
+Self-interacting dark matter (SIDM) predicts that elastic scattering between dark matter
+particles thermalizes the inner regions of halos, driving them through a two-phase
+gravothermal evolution: an initial core-forming phase in which energy is transported
+outward and the central density decreases, followed by a core-collapsing phase in which
+the inner halo becomes denser than its cold dark matter (CDM) counterpart.
+The onset and duration of these phases depend sensitively on the effective
+self-interaction cross section $\sigma_\mathrm{eff}/m$, which is itself a function of the
+local dark matter velocity dispersion and hence of halo mass.
+A powerful and observationally accessible statistic that captures this diversity is the
+distribution of enclosed dark matter masses within stellar half-light radii,
+$M(<r_{1/2})$, estimated via the Wolf et al.\ (2010) mass estimator from stellar
+line-of-sight velocity dispersions.
+We present a forward-model comparison of the $M(<r_{1/2})$ distribution for a
+volume-complete sample of Local Group dSphs within 800~kpc against predictions from CDM,
+SIDM, warm dark matter (WDM), and primordial power-spectrum bump models, and forecast
+the discriminating power achievable with the combined Rubin Observatory photometric
+survey and a next-generation wide-field spectrograph (SpecS5).
+
+
+% ── DETAILED ANALYSIS PARAGRAPHS (for methods/supplementary section) ─────
+
+\subsection*{Detailed Analysis Description}
+
+\paragraph{Forward model.}
+We construct a Monte Carlo population of $N = 2000$ dark matter halos by sampling
+virial masses from the Tinker et al.\ (2008) analytic halo mass function (HMF) over the
+range $10^8$--$10^{11}~M_\odot$ using inverse-CDF sampling via the \textsc{colossus}
+package \citep{Diemer2018}.
+All masses are defined with respect to the $200c$ overdensity threshold, consistent with
+the Diemer \& Joyce (2019) mass--concentration relation used to assign NFW concentrations
+with 0.15~dex log-normal scatter.
+NFW structural parameters $(\rho_s, r_s)$ are extracted via the \textsc{colossus}
+\texttt{NFWProfile} class, which handles the $h$-dependent unit conversions from
+colossus internal units to physical units exactly.
+Virial radii $R_\mathrm{vir}$ in the Bryan \& Norman (1998) overdensity definition are
+also computed via \textsc{colossus} and used for the stellar size relation below.
+Stellar half-light radii are assigned via a power-law size--halo relation
+$r_{1/2} = 37 \times (R_\mathrm{vir}/10~\mathrm{kpc})^{1.07}$~pc with 0.63~dex
+log-normal scatter, clipped to the observed dSph range of 20--3000~pc.
+This parametrisation is based on the empirical scaling relation of
+Jiang et al.\ (2019) and dominates the width of the predicted $M(<r_{1/2})$
+distribution.
+
+\paragraph{SIDM transformation.}
+We apply the parametric SIDM model of Yang et al.\ (2023, hereafter Y23) to transform
+each CDM halo into its SIDM counterpart.
+For each halo, we compute the effective self-interaction cross section
+$\sigma_\mathrm{eff}$ by numerically integrating the thermally-averaged Rutherford-like
+differential cross section
+$d\sigma/d\Omega = \sigma_0 w^4 / [2(w^2 + v^2\sin^2(\theta/2))^2]$
+over the Maxwell--Boltzmann velocity distribution with characteristic velocity
+$\nu_\mathrm{eff} = 1.1 V_\mathrm{max} / \sqrt{3}$,
+where $V_\mathrm{max} = 1.648\,r_s\sqrt{G\rho_s}$ for an NFW halo.
+We integrate up to $v_\mathrm{upper} = 10 \times \max(V_\mathrm{max}, w)$ to ensure
+the cross section has turned over before truncation; using the smaller cutoff
+$v_\mathrm{upper} = 3.06\,V_\mathrm{max}$ adopted by some earlier codes
+underestimates $\sigma_\mathrm{eff}$ by factors of $\sim$2--10 when $V_\mathrm{max} \ll w$,
+which is the relevant regime for dwarf halos.
+The gravothermal phase $\tau = t_\mathrm{age}/t_c$ is computed using the collapse
+timescale $t_c = (150/0.75)\,(\sigma_\mathrm{eff}\,\rho_s\,r_s)^{-1}(4\pi G\rho_s)^{-1/2}$
+calibrated from N-body simulations \citep{Yang2023}, where $t_\mathrm{age}$ is the halo
+age estimated from a quadratic fit to the Giocoli et al.\ (2011) formation redshift
+relation.
+The evolved SIDM density profile is evaluated using the parametric fits of Y23
+(their eq.~2.3) to $\rho_s(\tau)$, $r_s(\tau)$, and $r_c(\tau)$, and the enclosed
+mass within $r_{1/2}$ is computed via the analytic approximation
+$M_\mathrm{SIDM}(<r_{1/2}) = \tanh(r_{1/2}/r_c(\tau)) \times M_\mathrm{NFW}(<r_{1/2};\,
+\rho_s(\tau), r_s(\tau))$, which recovers the NFW result at $r_{1/2} \gg r_c$
+and suppresses the enclosed mass when $r_{1/2}$ lies within the dark matter core.
+We consider two SIDM benchmark models: a moderate model
+($\sigma_0 = 147~\mathrm{cm^2\,g^{-1}}$, $w = 70~\mathrm{km\,s^{-1}}$) that produces
+cores in the lower-mass halos, and a stronger model
+($\sigma_0 = 500~\mathrm{cm^2\,g^{-1}}$, $w = 50~\mathrm{km\,s^{-1}}$) that creates
+a diverse mix of cored and core-collapsed halos across the dwarf mass range.
+
+\paragraph{Observational comparison and Rubin forecast.}
+We compile a volume-complete sample of 87 Local Group dSphs within 800~kpc with Wolf
+mass estimates, of which 62 have fractional mass uncertainties $\Delta M/M < 1$ and are
+used for the comparison.
+Enclosed mass uncertainties are dominated by statistical errors on the stellar velocity
+dispersion, with median $\Delta M/M \approx 0.31$ for the SpecS5 forecast and
+$\approx 0.55$ for the current literature.
+We construct a differential histogram $dN/d\log_{10}M(<r_{1/2})$ in 9 equal-width
+log-mass bins spanning $10^{5.5}$--$10^{8.8}~M_\odot$, with Gehrels (1986)
+Poisson confidence intervals augmented by bootstrap mass measurement uncertainties
+added in quadrature.
+All model curves are normalised so that their total integral matches the observed
+sample size, enabling a shape-only comparison; absolute normalisation requires a
+full galaxy--halo connection model accounting for the luminosity function and survey
+completeness, which we do not attempt here.
+The current data prefer a flatter distribution than CDM at intermediate masses
+($10^6$--$10^7~M_\odot$), with CDM having $\chi^2/\mathrm{dof} \approx 1.3$
+compared to $\chi^2/\mathrm{dof} \approx 0.3$--0.6 for the SIDM and WDM models,
+although none can be statistically rejected at $> 2\sigma$ with the current sample.
+
+For the Rubin Observatory forecast, we estimate that $N_\mathrm{Rubin} \approx 170$
+(range 150--200) dSphs within 800~kpc will have photometric detections:
+$\sim$89 MW satellites detectable by Rubin within 300~kpc (Tsiane et al.\ 2025),
+of which $\sim$54 are new discoveries, plus $\sim$30--50 newly discovered M31
+ultra-faint satellites enabled by Rubin's southern sky coverage of the M31 system
+(Mau et al.\ 2021), and $\sim$10--20 isolated Local Group dwarfs at 300--800~kpc.
+We compare two scenarios for the kinematic follow-up of this photometric sample:
+(i) \textit{Rubin only}, in which mass measurements are available for the 58
+currently-known reliable galaxies with literature velocity dispersions, giving
+Poisson errors per bin of $\sqrt{N_\mathrm{lit}/N_\mathrm{bin}} \approx 40\%$;
+and (ii) \textit{Rubin + SpecS5}, in which all $\sim$170 Rubin discoveries have
+SpecS5-quality velocity dispersions, reducing per-bin Poisson errors by
+$\sqrt{N_\mathrm{Rubin}/N_\mathrm{lit}} \approx 1.7\times$ to $\approx 25\%$.
+At this level of statistical precision, with 9 bins and model differences of $\sim$1--$2\sigma$
+per bin, we forecast that the combined Rubin+SpecS5 dataset would achieve $\sim$2$\sigma$
+discrimination between CDM and the moderate SIDM model integrated over the full histogram,
+and $\gtrsim 3\sigma$ separation from WDM 7~keV and the primordial power-spectrum bump
+model considered here, which produce qualitatively distinct features (a sharp low-mass
+cutoff and an intermediate-mass excess, respectively) that are clearly distinguishable
+from both CDM and SIDM even with current sample sizes.
