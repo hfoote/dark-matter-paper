@@ -1,0 +1,32 @@
+Notebook: 
+SpecS5_LVD_WolfMass.ipynb
+
+Overview:
+This notebook forecasts the estimated enclosed mass uncertainty of existing dwarf galaxies assuming a single 30-minute pass.
+
+\paragraph{Local Group Dwarf Galaxy Sample}
+We select all confirmed dwarf galaxies in the Local Volume Database (LVD) within 800 kpc and $M_V \geq -15.5$. This sample includes 87 Local Group dwarf galaxies, including Milky Way satellites, M31 satellites, and field galaxies. It makes no selection on level of disruption, which probably should be fixed in a future iteration (i.e., to remove Sagittarius).
+
+\paragraph{Mock Spec-S5 Local Group Dwarf Galaxy Observations}
+We use the \texttt{minimint} and \texttt{imf} python packages to sample sample $10^7$ stars from stellar isochrones assuming the \texttt{chabrier2005} IMF, $\text{[Fe/H] = -2}$, and $\text{age} = 12$ Gyr. We remove stars with $m > M_\odot$. 
+
+For each Local Group dwarf galaxy, we resample from this sample to match the magnitude of the dwarf from the LVD. The photometry is then adjusted to the distance of the galaxy as reported in the LVD and keep stars with $z < 22$ ($\sigma_v <10$ km/s). The $\Delta$RA and $\Delta$Dec for each star is then sampled from a Plummer distribution with the $r_\text{half}$ of the galaxy from LVD. To generate an observed sample, we perform a simple mock fiber assignment simulation by dividing the Spec-S5 field of view into a grid in $\Delta$RA and $\Delta$Dec and sampling up to the average fiber density of Spec-S5, assuming a 1.1 degree field of view and 13,000 fibers. In each bin, the brightest targets are preferentially selected. This sampling will soon be implemented by \texttt{spec5.instrument.fiber.mock_fiber_assign()}. For each observed star, the predicted velocity uncertainty is calculated using \texttt{spec5.instrument.stellar_etc.compute_measurement_errors()} given the star’s observed z-band magnitude and three 10-minute exposures (totalling 30 minutes). 
+
+Given the ratio of target density to fiber density within $r_\text{half}$, we will likely want to test how using multiple passes can improve the enclosed mass constraints. 
+
+\paragraph{Calculating Enclosed Mass Uncertainties}
+Taking the sample of observed stars within $r_\text{half}$, we forecast the velocity dispersion uncertainty:
+\begin{equation}
+Err(\hat \sigma)^{-2} = 2 \sigma^2 \sum_i \frac{1}{(\sigma^2+e_i^2)^2},
+\end{equation}
+Where $\sigma$ is the velocity dispersion of the dwarf galaxy from the LVD and $e_i$ is the velocity uncertainty of each star. We assume the Wolf mass estimator for the mass enclosed within $r_\text{half}$ (Wolf et al. 2010).  The fractional mass uncertainty is then:
+\begin{equation}
+\left(\frac{\delta M}{M}\right)^2 = 4 \left(\frac{\delta \sigma}{\sigma}\right)^2 + \left(\frac{\delta r_\text{half}}{r_\text{half}}\right)^2
+\end{equation}.
+Here we ignore the uncertainty on $r_\text{half}$. We again assume the velocity dispersion, r_\text{half} of the dwarf galaxy from the LVD. The absolute uncertainty on the enclosed mass is calculated assuming the dynamical mass from LVD. 
+
+\paragraph{Figures}
+We plot the forecasted fractional and absolute mass uncertainties for each dwarf as a function of stellar luminosity and distance (from LVD). We plot the same for the forecasted fractional and absolute velocity dispersion uncertainties. A plot of the number of stars included in the mass estimate calculation is also included. We also plot a comparison of the forecasted fractional mass uncertainty with the uncertainty of previous literature measurements (also from LVD). 
+
+\paragraph{Connection to Dark Matter Constraints}
+These observational forecasts feed into the constraints on the mass function of dwarf galaxies, which are discussed elsewhere within the \texttt{nearfield} folder of this repository.
