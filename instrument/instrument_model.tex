@@ -6,3 +6,11 @@ A shorter fiber route, improved fiber efficiency, and improved low-noise detecto
 Spec-S5 expects to deliver spectra of $\sim$150 million stars over $\sim$20,000\,deg^2 of the high-Galactic-latitude sky.
 
 
+The Spec-S5 sensitivity is modeled based on the performance of the Dark Energy Spectroscopic Instrument (DESI). The model includes the transmission of the atmosphere (at zenith), the throughput of the telescope (primary and secondary reflective optics), the transmission of the corrector optics, the fiber losses dues to the fiber aperture and throughput (accounting for the shorter fiber length), the spectrograph throughput (assumed to be identical to the DESI 3-arm spectrographs), and the detector quantum efficiency (assuming MAS CCDs for the blue arm). The signal-to-noise ratio computations assume the DESI-measured sky brightness. DESI observations of faint stars show that the radial velocity measurement uncertainty is proportional to the signal-to-noise ratio measured in the z-arm of the spectrograph (i.e., SN\_Z)\footnote{This measurement error will likely be smaller if Spec-S5 incorporates a near-infrared arm in the existing DESI spectrographs, since this will have a higher resolution of $R\approx6500$ (compared with the current Z-arm resolution of $R\approx 5000$).}:
+
+% VRAD_ERR = 10.0**(1.389 - 0.975*np.log10(SN_Z)) - 0.975*np.log10(0.8))
+\begin{equation}
+\sigma(V_{\rm rad}) = 10^{\rm 1.389 - 0.975log(SN\_Z) - 0.975log(0.8)}
+\end{equation}
+
+The model predicts that a $3 \times 1200$~sec observation of a z=22~AB mag star with Spec-S5 will result in a $\sigma(V_{\rm rad})$ of $\approx 6.5~{\rm km,s^{-1}}$.
