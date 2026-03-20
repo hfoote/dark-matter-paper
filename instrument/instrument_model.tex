@@ -1,0 +1,27 @@
+The Spec-S5 instrument concept consists of installing new 6-m mirrors on two existing telescopes:  the Mayall Telescope at Kitt Peak National Observatory in Arizona and the Blanco Telescope at Cerro Tololo Inter-American Observatory in Chile.
+Each Spec-S5 telescope will consist of a $\sim$13,000 fiber focal plane with a field of view of 2.2 deg$^2$ and a fiber density of $\sim$XXX fibers per arcmin$^2$.
+The baseline design deploys 23 spectrographs based on the DESI design, covering a wavelength range from 360 to 980\,nm at resolutions ranging from $R \sim 2000$ at the blue end to $R \sim 5500$ at the red end.
+Each spectrograph will be by $\sim$567 fibers, each with a diameter of 107\,$\mu$m corresponding to an angular size of $\sim$1 arcsec.
+A shorter fiber route, improved fiber efficiency, and improved low-noise detectors project a factor of $\sim$30\% improvement in the blue throughput.
+Spec-S5 expects to deliver spectra of $\sim$150 million stars over $\sim$20,000\,deg^2 of the high-Galactic-latitude sky.
+
+The Spec-S5 sensitivity is modeled based on the performance of the Dark Energy Spectroscopic Instrument (DESI). The model includes the transmission of the atmosphere (at zenith), the throughput of the telescope (primary and secondary reflective optics), the transmission of the corrector optics, the fiber losses dues to the fiber aperture and throughput (accounting for the shorter fiber length), the spectrograph throughput (assumed to be identical to the DESI 3-arm spectrographs), and the detector quantum efficiency (assuming MAS CCDs for the blue arm). The signal-to-noise ratio computations assume the DESI-measured sky brightness. DESI observations of faint stars show that the radial velocity measurement uncertainty is proportional to the signal-to-noise ratio measured in the Z-arm of the spectrograph (i.e., SN\_Z)\footnote{This measurement error will likely be smaller if Spec-S5 incorporates a near-infrared arm in the existing DESI spectrographs, since this will have a higher resolution of $R\approx6500$ (compared with the average resolution of the current Z-arm, $R \approx 5000$).}:
+
+% VRAD_ERR = 10.0**(1.389 - 0.975*np.log10(SN_Z)) - 0.975*np.log10(0.8))
+\begin{equation}
+\sigma(V_{\rm rad}) = 10^{\rm 1.389 - 0.975log(SN\_Z) - 0.975log(0.8)}
+\end{equation}
+
+\noindent The model predicts that a $3 \times 1200$~sec observation of a z=22~AB mag star with Spec-S5 will result in a $\sigma(V_{\rm rad})$ of $\approx 6.5~{\rm km,s^{-1}}$.
+
+We leverage the recent spectrophotometric performance of DESI (i.e., \citep[i.e., SpecDis][]{Li:2025} as an estimate of the expected performance of Spec-S5. 
+In particular, SpecDis is a feed-forward multilayer perceptron neural network tained on Gaia parallaxes and DESI spectra. It has been validated against independent tracers — globular cluster, dwarf galaxy, and stellar stream members plus BHB stars — showing no significant systematic bias out to 100 kpc with median distance uncertainties of ~7–23\% depending on S/N. In particular, we model the spectrophotometric distance uncertainty from Spec-S5 using the SpecDis distance uncertainty as a function of SNR that is shown in Figure 9 of \citet{Li:2025}.
+
+While Spec-S5 itself will not deliver proper motion estimates, we expect that in the 2030s there will be numerous improved proper motion catalogs available covering large portions of the Spec-S5 footprint. In particular, the the {\it Gaia} mission is expected to deliver its next data release (DR4) in late 2026 and its final data release (DR5) in 2030. We include estimates of the proper motion uncertainty for Gaia DR4 and DR5 using the relations published on the Gaia website\footnote{\url{https://www.cosmos.esa.int/web/gaia/science-performance}}. While {\it Gaia} provides exceptional precision for bright objects, the small size of the {\it Gaia} telescope limits it to measurements of stars with $G \less 20.7$\,mag. Fainter stars can be access by ground and space-based telescopes with larger diameters. For the purposes of Spec-S5 projections, we use projected sensitivity estimates coming from the extended baseline established by DECam linked to LSST Y1 and Y10. These projections include the expected improvement in astrometric accuracy coming from detailed camera modeling \citep[e.g.,][]{Bernstein:2017} and atmospheric turbulence reduction \citep{Fortino:2021, Gomes:2025} that lead to an expected systematic floor on the astrometry at $\sim$3\,mas.
+
+The Spec-S5 sensitivity model can be accessed through the \texttt{spec-s5-instrument}\footnote{\url{https://github.com/spec-s5/spec-s5-instrument}} module. Functions are implemented to generate mock observational data and uncertainties from catalogs of stars in cartesian Galactocenctric coordinates or heliocentric celestial coordinates.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{spec5-uncertainty-z.png}
+\caption{Projected uncertainties for radial velocity (left), proper motion (center), and distance (right) in the era of Spec-S5. The code to generate this plot can be found in \href{https://github.com/spec-s5/spec-s5-instrument/blob/main/notebooks/measurement_errors_demo.ipynb}{measurement\_errors\_demo.ipynb}}.
+\end{figure}
